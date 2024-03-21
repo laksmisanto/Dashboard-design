@@ -19,27 +19,26 @@ function getItem(label, key, icon, children, type) {
 }
 const items = [
   getItem("user", "user", <UserOutlined />, [
-    getItem("add user", "1", <UserAddOutlined />),
-    getItem("user list", "2", <UnorderedListOutlined />),
+    getItem("add user", "/add-user", <UserAddOutlined />),
+    getItem("user list", "/user-list", <UnorderedListOutlined />),
   ]),
   {
     type: "divider",
   },
   getItem("category", "category", <AppstoreOutlined />, [
-    getItem("add category", "3", <AppstoreAddOutlined />),
-    getItem("category list", "4", <UnorderedListOutlined />),
+    getItem("add category", "/add-category", <AppstoreAddOutlined />),
+    getItem("category list", "/category-list", <UnorderedListOutlined />),
   ]),
   getItem("product", "product", <ProductOutlined />, [
-    getItem("add product", "5", <AppstoreAddOutlined />),
-    getItem("product list", "6", <UnorderedListOutlined />),
+    getItem("add product", "/add-product", <AppstoreAddOutlined />),
+    getItem("product list", "/product-list", <UnorderedListOutlined />),
   ]),
 ];
 
 const MenuBar = () => {
   const navigate = useNavigate();
   const onClick = (e) => {
-    // navigate(e.key);
-    console.log(e.keyPath[1]);
+    navigate(e.key);
   };
   return (
     <>

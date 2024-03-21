@@ -1,0 +1,45 @@
+.error__page {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.error__page h1 {
+  font-size: 120px;
+  font-weight: 700;
+  color: rgb(0, 42, 82);
+  margin: 0;
+  padding: 0;
+  text-shadow: 4px 4px 4px rgb(20, 20, 20);
+}
+.error__page h1 span {
+  font-weight: 700;
+  color: rgb(0, 88, 139);
+  font-size: 120px;
+  text-shadow: 4px 4px 6px rgb(20, 20, 20);
+  margin: 0 8px;
+}
+.error__page h2 {
+  font-size: 84px;
+  font-weight: 700;
+  color: rgb(0, 88, 139);
+  line-height: 40px;
+}
+.error__page h4 {
+  font-size: 24px;
+  font-weight: 500;
+  color: rgb(0, 88, 139);
+}
+.error__page button {
+  font-size: 18px;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 8px 18px;
+  background: rgb(0, 88, 139);
+  color: #fff;
+  margin-top: 10px;
+}
