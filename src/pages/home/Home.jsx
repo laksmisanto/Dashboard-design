@@ -1,8 +1,8 @@
 const Home = () => {
   return (
     <>
-      <h2>Home page</h2>
-      <p>
+      <h2 className="text-xl font-bold text-gray-900">Home page</h2>
+      <p className="font-md text-gray-900">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet odit
         esse quasi, architecto tempore labore ea voluptatem in repudiandae
         error, ut hic laboriosam officia? In exercitationem vitae quae eius,

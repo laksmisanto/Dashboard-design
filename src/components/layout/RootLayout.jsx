@@ -5,16 +5,14 @@ import { Col, Row } from "antd";
 const RootLayout = () => {
   return (
     <>
-      <div className="xl:container container">
-        <Row>
-          <Col className="xl:w-1/5">
-            <MenuBar />
-          </Col>
-          <Col className="xl:w-4/5">
-            <Outlet />
-          </Col>
-        </Row>
-      </div>
+      <Row>
+        <Col className="md:w-1/5">
+          <MenuBar />
+        </Col>
+        <Col className="md:w-4/5 p-3 bg-gray-100 h-screen">
+          <Outlet />
+        </Col>
+      </Row>
     </>
   );
 };

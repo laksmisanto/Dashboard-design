@@ -29,6 +29,9 @@ const items = [
     getItem("add category", "/add-category", <AppstoreAddOutlined />),
     getItem("category list", "/category-list", <UnorderedListOutlined />),
   ]),
+  {
+    type: "divider",
+  },
   getItem("product", "product", <ProductOutlined />, [
     getItem("add product", "/add-product", <AppstoreAddOutlined />),
     getItem("product list", "/product-list", <UnorderedListOutlined />),
@@ -44,9 +47,11 @@ const MenuBar = () => {
     <>
       <Menu
         onClick={onClick}
-        style={{
-          width: 256,
-        }}
+        style={
+          {
+            // width: 254,
+          }
+        }
         defaultSelectedKeys={["1"]}
         defaultOpenKeys={["sub1"]}
         mode="inline"
