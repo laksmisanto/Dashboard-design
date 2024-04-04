@@ -69,9 +69,11 @@ const UserList = () => {
       render: (_, record) =>
         record.role === "customer" ? (
           <Badge count={record.role} showZero color="#faad14" />
-        ) : (
-          "Not verified"
-        ),
+        ) : record.role === "admin" ? (
+          <Badge count={record.role} showZero color="#faad14" />
+        ) : record.role === "editor" ? (
+          <Badge count={record.role} showZero color="#faad14" />
+        ) : null,
     },
     {
       title: "isVerified",
