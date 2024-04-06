@@ -3,12 +3,15 @@ import {
   MailOutlined,
   PhoneOutlined,
   EnvironmentOutlined,
+  LockOutlined,
 } from "@ant-design/icons";
 import { Button, Col, Input, Row, Select, Typography } from "antd";
 import axios from "axios";
 import { useState } from "react";
 
 const AddUser = () => {
+  const [btnLoading, setBtnLoading] = useState(false);
+
   const [inputValues, setInputValues] = useState({
     firstName: "",
     lastName: "",
@@ -38,12 +41,14 @@ const AddUser = () => {
   };
 
   const handleAddUsers = async () => {
+    setBtnLoading(true);
     try {
       const res = await axios.post(
         "http://localhost:8000/api/v1/users/register",
         inputValues
       );
       if (res.status === 200) {
+        setBtnLoading(false);
         setInputValues(() => ({
           firstName: "",
           lastName: "",
@@ -247,23 +252,29 @@ const AddUser = () => {
         </Col>
         <Col span={12}>
           <div>
-            <Typography.Title level={5}>Division</Typography.Title>
-            <Input
+            <Typography.Title level={5}>Password</Typography.Title>
+            <Input.Password
               size="large"
               className="mb-2"
               placeholder="password"
               name="password"
               onChange={(e) => handleInputValues(e)}
               value={inputValues.password}
-              prefix={<EnvironmentOutlined />}
+              prefix={<LockOutlined />}
             />
           </div>
         </Col>
       </Row>
       <div className="mt-8">
-        <Button size="large" type="primary" onClick={handleAddUsers}>
-          Primary
-        </Button>
+        {btnLoading ? (
+          <Button size="large" type="primary" loading>
+            Loading
+          </Button>
+        ) : (
+          <Button size="large" type="primary" onClick={handleAddUsers}>
+            Primary
+          </Button>
+        )}
       </div>
     </>
   );
