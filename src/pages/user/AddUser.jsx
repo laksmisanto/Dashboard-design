@@ -6,8 +6,8 @@ import {
   LockOutlined,
 } from "@ant-design/icons";
 import { Button, Col, Input, Row, Select, Typography } from "antd";
-import axios from "axios";
 import { useState } from "react";
+import api from "../../api";
 
 const AddUser = () => {
   const [btnLoading, setBtnLoading] = useState(false);
@@ -26,27 +26,19 @@ const AddUser = () => {
     password: "",
     role: "",
   });
-  // const [roleData, setRoleData] = useState({
-  //   role: "",
-  // });
   const handleInputValues = (e) => {
     const { name, value } = e.target;
     setInputValues((prevValue) => ({ ...prevValue, [name]: value }));
   };
 
   const handleChange = (value) => {
-    // console.log(`selected ${value}`);
-    // setRoleData(() => ({ role: value }));
     setInputValues((prevValue) => ({ ...prevValue, role: value }));
   };
 
   const handleAddUsers = async () => {
     setBtnLoading(true);
     try {
-      const res = await axios.post(
-        "http://localhost:8000/api/v1/users/register",
-        inputValues
-      );
+      const res = await api.post("users/register", inputValues);
       if (res.status === 200) {
         setBtnLoading(false);
         setInputValues(() => ({
@@ -268,11 +260,11 @@ const AddUser = () => {
       <div className="mt-8">
         {btnLoading ? (
           <Button size="large" type="primary" loading>
-            Loading
+            Add User
           </Button>
         ) : (
           <Button size="large" type="primary" onClick={handleAddUsers}>
-            Primary
+            Add User
           </Button>
         )}
       </div>

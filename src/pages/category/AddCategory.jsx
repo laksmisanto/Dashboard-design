@@ -2,19 +2,10 @@ import {
   UserOutlined,
   AlignLeftOutlined,
   MinusOutlined,
-  PlusOutlined,
 } from "@ant-design/icons";
-import { Input, Button, Upload, Image } from "antd";
-import axios from "axios";
+import { Input, Button } from "antd";
 import { useState } from "react";
-
-// const getBase64 = (file) =>
-//   new Promise((resolve, reject) => {
-//     const reader = new FileReader();
-//     reader.readAsDataURL(file);
-//     reader.onload = () => resolve(reader.result);
-//     reader.onerror = (error) => reject(error);
-//   });
+import api from "../../api";
 
 const AddCategory = () => {
   const [inputValues, setInputValues] = useState({
@@ -28,58 +19,37 @@ const AddCategory = () => {
     setInputValues((prevValue) => ({ ...prevValue, [name]: value }));
   };
 
-  // const [previewOpen, setPreviewOpen] = useState(false);
-  // const [previewImage, setPreviewImage] = useState("");
   const [categoryImage, setCategoryImage] = useState([]);
 
   const handleCategoryImage = (e) => {
     setCategoryImage(e.target.files[0]);
   };
-
+  const [btnLoading, setBtnLoading] = useState(false);
   const handleAddCategory = async () => {
-    console.log("click hoise");
-    // const formData = new formData();
-    // formData.append("categoryImage", categoryImage);
-    let data = { ...inputValues, categoryImage: categoryImage };
-    let res = await axios.post(
-      "http://localhost:8000/api/v1/category/create?createCategory",
-      data,
-      {
+    setBtnLoading(true);
+    try {
+      let data = { ...inputValues, categoryImage: categoryImage };
+      let res = await api.post("category/create?createCategory", data, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
+      });
+      if (res.status === 201) {
+        setBtnLoading(false);
+        setCategoryImage(() => ({
+          categoryImage: "",
+        }));
+        setInputValues(() => ({
+          name: "",
+          details: "",
+          slug: "",
+        }));
       }
-    );
-    // console.log("formData : ", formData);
-    console.log("data : ", res);
+      console.log("add user successful :", res);
+    } catch (error) {
+      console.log("Add Category Error : ", error);
+    }
   };
-
-  // const handlePreview = async (file) => {
-  //   if (!file.url && !file.preview) {
-  //     file.preview = await getBase64(file.originFileObj);
-  //   }
-  //   setPreviewImage(file.url || file.preview);
-  //   setPreviewOpen(true);
-  // };
-
-  // const uploadButton = (
-  //   <button
-  //     style={{
-  //       border: 0,
-  //       background: "none",
-  //     }}
-  //     type="button"
-  //   >
-  //     <PlusOutlined />
-  //     <div
-  //       style={{
-  //         marginTop: 8,
-  //       }}
-  //     >
-  //       Upload
-  //     </div>
-  //   </button>
-  // );
 
   return (
     <>
@@ -105,32 +75,6 @@ const AddCategory = () => {
           prefix={<AlignLeftOutlined />}
         />
       </div>
-      {/* <div>
-        <Upload
-          // action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
-          listType="picture-card"
-          fileList={fileList}
-          onPreview={handlePreview}
-          name="categoryImage"
-          onChange={handleChange}
-          value={inputValues.categoryImage}
-        >
-          {fileList.length >= 5 ? null : uploadButton}
-        </Upload>
-        {previewImage && (
-          <Image
-            wrapperStyle={{
-              display: "none",
-            }}
-            preview={{
-              visible: previewOpen,
-              onVisibleChange: (visible) => setPreviewOpen(visible),
-              afterOpenChange: (visible) => !visible && setPreviewImage(""),
-            }}
-            src={previewImage}
-          />
-        )}
-      </div> */}
       <div>
         <Input
           size="large"
@@ -138,6 +82,7 @@ const AddCategory = () => {
           type="file"
           name="categoryImage"
           onChange={handleCategoryImage}
+          value={inputValues.categoryImage}
         />
       </div>
       <div>
@@ -152,9 +97,15 @@ const AddCategory = () => {
         />
       </div>
       <div>
-        <Button size="large" type="primary" onClick={handleAddCategory}>
-          Primary
-        </Button>
+        {btnLoading ? (
+          <Button size="large" type="primary" loading>
+            add category
+          </Button>
+        ) : (
+          <Button size="large" type="primary" onClick={handleAddCategory}>
+            add category
+          </Button>
+        )}
       </div>
     </>
   );

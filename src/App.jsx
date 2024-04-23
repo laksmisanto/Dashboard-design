@@ -8,11 +8,15 @@ import AddCategory from "./pages/category/AddCategory";
 import CategoryList from "./pages/category/CategoryList";
 import AddProduct from "./pages/product/AddProduct";
 import ProductList from "./pages/product/ProductList";
+import Login from "./pages/Login";
 
 const App = () => {
   return (
     <>
       <Routes>
+        <Route>
+          <Route path="login" element={<Login />} />
+        </Route>
         <Route element={<RootLayout />}>
           <Route index element={<Home />} />
           <Route path="add-user" element={<AddUser />} />

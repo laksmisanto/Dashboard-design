@@ -1,9 +1,10 @@
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import MenuBar from "../menu/MenuBar";
 import { Col, Row } from "antd";
 
 const RootLayout = () => {
-  return (
+  const auth = JSON.parse(localStorage.getItem("_userInfo"));
+  return auth && auth.user.role === "admin" ? (
     <>
       <Row>
         <Col className="md:w-1/5">
@@ -14,6 +15,8 @@ const RootLayout = () => {
         </Col>
       </Row>
     </>
+  ) : (
+    <Navigate to="/login" />
   );
 };
 

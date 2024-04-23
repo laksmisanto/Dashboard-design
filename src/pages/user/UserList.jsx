@@ -1,17 +1,15 @@
 import { Space, Table } from "antd";
 
 import { Badge } from "antd";
-import axios from "axios";
 import { useEffect, useState } from "react";
+import api from "../../api";
 
 const UserList = () => {
   let [userList, setUserList] = useState();
   useEffect(() => {
     (async () => {
       try {
-        let res = await axios.get(
-          "http://localhost:8000/api/v1/users/user-list"
-        );
+        let res = await api.get("users/user-list");
         if (res.status === 200) {
           setUserList(res?.data);
         }
