@@ -9,6 +9,8 @@ import CategoryList from "./pages/category/CategoryList";
 import AddProduct from "./pages/product/AddProduct";
 import ProductList from "./pages/product/ProductList";
 import Login from "./pages/Login";
+import AddVariation from "./pages/variation/AddVariation";
+import VariationList from "./pages/variation/VariationList";
 
 const App = () => {
   return (
@@ -25,6 +27,8 @@ const App = () => {
           <Route path="category-list" element={<CategoryList />} />
           <Route path="add-product" element={<AddProduct />} />
           <Route path="product-list" element={<ProductList />} />
+          <Route path="add-variation" element={<AddVariation />} />
+          <Route path="variation-list" element={<VariationList />} />
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>

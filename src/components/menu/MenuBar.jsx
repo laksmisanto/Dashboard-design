@@ -36,6 +36,13 @@ const items = [
     getItem("add product", "/add-product", <AppstoreAddOutlined />),
     getItem("product list", "/product-list", <UnorderedListOutlined />),
   ]),
+  {
+    type: "divider",
+  },
+  getItem("variation", "variation", <ProductOutlined />, [
+    getItem("add variation", "/add-variation", <AppstoreAddOutlined />),
+    getItem("variation list", "/variation-list", <UnorderedListOutlined />),
+  ]),
 ];
 
 const MenuBar = () => {
