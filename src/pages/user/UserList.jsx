@@ -100,7 +100,7 @@ const UserList = () => {
       <h2 className="text-2xl font-bold text-center text-gray-800 mb-5">
         User List
       </h2>
-      <Table columns={columns} dataSource={userList} />
+      <Table columns={columns} dataSource={userList} key={columns.key} />
     </>
   );
 };

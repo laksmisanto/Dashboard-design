@@ -2,8 +2,10 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Row, Col, Input, Typography, Button } from "antd";
 import { useState } from "react";
 import api from "../api";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [btnLoading, setBtnLoading] = useState(false);
   const [inputValues, setInputValues] = useState({
     email: "",
@@ -18,6 +20,12 @@ const Login = () => {
     setBtnLoading(true);
     try {
       const res = await api.post("users/login", inputValues);
+      const { accessToken, refreshToken, role } = res.data.data;
+      localStorage.setItem(
+        "_userInfo",
+        JSON.stringify({ accessToken, refreshToken, role })
+      );
+      navigate("/");
       console.log("Login successful : ", res);
 
       if (res.status === 200 || res.status === 201) {

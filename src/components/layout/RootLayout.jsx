@@ -4,7 +4,9 @@ import { Col, Row } from "antd";
 
 const RootLayout = () => {
   const auth = JSON.parse(localStorage.getItem("_userInfo"));
-  return auth && auth.user.role === "admin" ? (
+  console.log("Rootlayout page auth : ", auth);
+
+  return auth && auth.role === "admin" ? (
     <>
       <Row>
         <Col className="md:w-1/5">
@@ -16,7 +18,7 @@ const RootLayout = () => {
       </Row>
     </>
   ) : (
-    <Navigate to="/login" />
+    <Navigate to={"/login"} />
   );
 };
 
